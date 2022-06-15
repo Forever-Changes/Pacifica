@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<script>
+  function includeHTML() {
+    var z, i, elmnt, file, xhttp;
+    /* Loop through a collection of all HTML elements: */
+    z = document.getElementsByTagName("*");
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      /*search for elements with a certain atrribute:*/
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        /* Make an HTTP request using the attribute value as the file name: */
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+            if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+            /* Remove the attribute, and call this function once more: */
+            elmnt.removeAttribute("w3-include-html");
+            includeHTML();
+          }
+        }
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        /* Exit the function: */
+        return;
+      }
+    }
+  }
+  </script> 
+
+<html>
+  
+
+
+
+
+<head>
+<div w3-include-html="assets/inc/header.html"></div>
+  <script>
+  function getStylesheet() {
+    var currentTime = new Date().getHours();
+    if (0 <= currentTime&&currentTime < 5) {
+     document.write("<link rel='stylesheet' href='night.css' type='text/css'>");
+    }
+    if (5 <= currentTime&&currentTime < 11) {
+     document.write("<link rel='stylesheet' href='morning.css' type='text/css'>");
+    }
+    if (11 <= currentTime&&currentTime < 18) {
+     document.write("<link rel='stylesheet' href='stylesheet.css' type='text/css'>");
+    }
+    if (18 <= currentTime&&currentTime < 22) {
+     document.write("<link rel='stylesheet' href='evening.css' type='text/css'>");
+    }
+    if (22 <= currentTime&&currentTime <= 24) {
+     document.write("<link rel='stylesheet' href='night.css' type='text/css'>");
+    }
+  }
+  
+  getStylesheet();
+  
+  </script>
+  
+  <noscript><link href="stylesheet.css" rel="stylesheet"></noscript>
+</head>
+
+<header>
+
+  <h3 class="title" >PACIFICA</h3> 
+  
+ 
+  
+</header>
+
+<body>
+  <div id="navbar" margin="1px">
+      <h3 >You Are Here: <a class="link" href="index.html">Home</a> > <a class="link" href="aboutme.html">About Me</a></h3>
+  </div>
+  
+  <div id="wrap">
+    
+
+
+  
+    <div w3-include-html="assets/inc/nav.html"></div>
+
+    <div id="content">
+      <h1>Arron Ware</h1>
+      <br>
+      <img src="assets/img/mesquish.jpeg" alt="Me with a squished filter" width="50%" >
+      <br>
+      <br>
+      <h2>Hello, born in Lincolnshire, UK. My interests lie with Music, Technology and Photography. 
+        <br>I like to read, mainly autobiographies but I'm open to all sorts, more into the art-sy stuff as of late.</h2>
+      <br>
+      <br>
+      <h2>Be sure to look below, in the page footer, for some links so that you can get to know me better! </h2>
+
+    </div>
+
+
+  </div>
+
+
+
+
+  
+
+
+
+
+
+
+
+  </body>
+
+
+
+
+
+
+
+
+
+
+
+<footer class="flex-container">
+
+  <div w3-include-html="assets/inc/footer.html"></div>
+
+</footer>
+
+
+
+<script>
+  includeHTML();
+</script>
+
+   
+</html>
+
+

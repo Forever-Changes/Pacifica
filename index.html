@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /* Loop through a collection of all HTML elements: */
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /* Make an HTTP request using the attribute value as the file name: */
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+              if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+              /* Remove the attribute, and call this function once more: */
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /* Exit the function: */
+          return;
+        }
+      }
+    }
+    </script> 
+
+<html>
+    
+
+ 
+
+
+<head>
+  <div w3-include-html="assets/inc/header.html"></div>
+    <script>
+    function getStylesheet() {
+      var currentTime = new Date().getHours();
+      if (0 <= currentTime&&currentTime < 5) {
+       document.write("<link rel='stylesheet' href='night.css' type='text/css'>");
+      }
+      if (5 <= currentTime&&currentTime < 11) {
+       document.write("<link rel='stylesheet' href='morning.css' type='text/css'>");
+      }
+      if (11 <= currentTime&&currentTime < 18) {
+       document.write("<link rel='stylesheet' href='stylesheet.css' type='text/css'>");
+      }
+      if (18 <= currentTime&&currentTime < 22) {
+       document.write("<link rel='stylesheet' href='evening.css' type='text/css'>");
+      }
+      if (22 <= currentTime&&currentTime <= 24) {
+       document.write("<link rel='stylesheet' href='night.css' type='text/css'>");
+      }
+    }
+    
+    getStylesheet();
+    
+    </script>
+    
+    <noscript><link href="stylesheet.css" rel="stylesheet"></noscript>
+</head>
+
+ <header>
+
+    <h3 class="title" >PACIFICA</h3> 
+    
+   
+    
+ </header>
+
+<body>
+  <div id="navbar" margin="1px">
+      <h3 >You Are Here: <a class="link" href="index.html">Home</a></h3>
+  </div>
+  
+  <div id="wrap">
+    
+
+
+  
+    <div w3-include-html="assets/inc/nav.html"></div>
+
+    <div id="content" >
+      <h1>Hello, Welcome to Pacifica!</h1>
+      <br>
+      <a title="Derzsi Elekes Andor, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Florida,_boat_trip,_1977_(22).jpg"><img width="512" alt="Florida, boat trip, 1977 (22)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Florida%2C_boat_trip%2C_1977_%2822%29.jpg/512px-Florida%2C_boat_trip%2C_1977_%2822%29.jpg"></a>
+      <br>
+      <br>
+      <h2>My little corner of the internet, hope you enjoy having a look around :) </h2>
+      <br>
+      <br>
+      <h2>This site's theme also updates according to your current timezone for your viewing convenience (and to show off a bit)</h2>
+      <br>
+      
+      
+    </div>
+
+
+  </div>
+
+
+
+
+    
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+<footer class="flex-container">
+
+<div w3-include-html="assets/inc/footer.html"></div>
+
+</footer>
+
+
+
+  <script>
+    includeHTML();
+  </script>
+  
+     
+</html>
+
+
